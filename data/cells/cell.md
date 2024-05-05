@@ -1,0 +1,66 @@
+What Is a Cell?
+Trees in a forest, fish in a river, horseflies on a farm, lemurs in the jungle, reeds in a pond, worms in the soil — all these plants and animals are made of the building blocks we call cells. Like these examples, many living things consist of vast numbers of cells working in concert with one another. Other forms of life, however, are made of only a single cell, such as the many species of bacteria and protozoa. Cells, whether living on their own or as part of a multicellular organism, are usually too small to be seen without a light microscope.
+
+Cells share many common features, yet they can look wildly different. In fact, cells have adapted over billions of years to a wide array of environments and functional roles. Nerve cells, for example, have long, thin extensions that can reach for meters and serve to transmit signals rapidly. Closely fitting, brick-shaped plant cells have a rigid outer layer that helps provide the structural support that trees and other plants require. Long, tapered muscle cells have an intrinsic stretchiness that allows them to change length within contracting and relaxing biceps.
+
+Still, as different as these cells are, they all rely on the same basic strategies to keep the outside out, allow necessary substances in and permit others to leave, maintain their health, and replicate themselves. In fact, these traits are precisely what make a cell a cell.
+
+What Defines a Cell?
+
+An illustration shows a cross section of a plasma membrane with three different transport proteins arranged across the phospholipid bilayer. Each protein acts as a pore, as shown by an arrow through the center of it.  Small beads representing molecules are hovering near the proteins, showing higher concentration either outside of the membrane or inside of it. The transport proteins are therefore regulating concentrations of molecules inside the cell, by controlling the passage of molecules through pores.
+Figure 1: Transport proteins in the cell membrane
+A plasma membrane is permeable to specific molecules that a cell needs. Transport proteins in the cell membrane allow for selective passage of specific molecules from the external environment. Each transport protein is specific to a certian molecule (indicated by matching colors).
+© 2010 Nature Education All rights reserved. View Terms of Use
+Cells are considered the basic units of life in part because they come in discrete and easily recognizable packages. That's because all cells are surrounded by a structure called the cell membrane — which, much like the walls of a house, serves as a clear boundary between the cell's internal and external environments. The cell membrane is sometimes also referred to as the plasma membrane.
+Cell membranes are based on a framework of fat-based molecules called phospholipids, which physically prevent water-loving, or hydrophilic, substances from entering or escaping the cell. These membranes are also studded with proteins that serve various functions. Some of these proteins act as gatekeepers, determining what substances can and cannot cross the membrane. Others function as markers, identifying the cell as part of the same organism or as foreign. Still others work like fasteners, binding cells together so they can function as a unit. Yet other membrane proteins serve as communicators, sending and receiving signals from neighboring cells and the environment — whether friendly or alarming (Figure 1).
+
+Within this membrane, a cell's interior environment is water based. Called cytoplasm, this liquid environment is packed full of cellular machinery and structural elements. In fact, the concentrations of proteins inside a cell far outnumber those on the outside — whether the outside is ocean water (as in the case of a single-celled alga) or blood serum (as in the case of a red blood cell). Although cell membranes form natural barriers in watery environments, a cell must nonetheless expend quite a bit of energy to maintain the high concentrations of intracellular constituents necessary for its survival. Indeed, cells may use as much as 30 percent of their energy just to maintain the composition of their cytoplasm.
+What Other Components Do Cells Have?
+As previously mentioned, a cell's cytoplasm is home to numerous functional and structural elements. These elements exist in the form of molecules and organelles — picture them as the tools, appliances, and inner rooms of the cell. Major classes of intracellular organic molecules include nucleic acids, proteins, carbohydrates, and lipids, all of which are essential to the cell's functions.
+
+Nucleic acids are the molecules that contain and help express a cell's genetic code. There are two major classes of nucleic acids: deoxyribonucleic acid (DNA) and ribonucleic acid (RNA). DNA is the molecule that contains all of the information required to build and maintain the cell; RNA has several roles associated with expression of the information stored in DNA. Of course, nucleic acids alone aren't responsible for the preservation and expression of genetic material: Cells also use proteins to help replicate the genome and accomplish the profound structural changes that underlie cell division.
+
+Proteins are a second type of intracellular organic molecule. These substances are made from chains of smaller molecules called amino acids, and they serve a variety of functions in the cell, both catalytic and structural. For example, proteins called enzymes convert cellular molecules (whether proteins, carbohydrates, lipids, or nucleic acids) into other forms that might help a cell meet its energy needs, build support structures, or pump out wastes.
+
+Carbohydrates, the starches and sugars in cells, are another important type of organic molecule. Simple carbohydrates are used for the cell's immediate energy demands, whereas complex carbohydrates serve as intracellular energy stores. Complex carbohydrates are also found on a cell's surface, where they play a crucial role in cell recognition.
+
+
+Finally, lipids or fat molecules are components of cell membranes — both the plasma membrane and various intracellular membranes. They are also involved in energy storage, as well as relaying signals within cells and from the bloodstream to a cell's interior (Figure 2).
+
+Some cells also feature orderly arrangements of molecules called organelles. Similar to the rooms in a house, these structures are partitioned off from the rest of a cell's interior by their own intracellular membrane. Organelles contain highly technical equipment required for specific jobs within the cell. One example is the mitochondrion — commonly known as the cell's "power plant" — which is the organelle that holds and maintains the machinery involved in energy-producing chemical reactions (Figure 3).
+
+
+A pie slice diagram shows the proportion of water to typical chemical components in a bacterial cell. Each chemical component is color-coded and is labeled by name and percent.
+Figure 2: The composition of a bacterial cell
+Most of a cell is water (70%). The remaining 30% contains varying proportions of structural and functional molecules.
+© 2010 Nature Education All rights reserved. View Terms of Use
+Figure Detail
+A diagram of scale shows how different biological features fall along a size gradient. Atoms are represented on the far left side of the scale, while much larger blood vessels are pictured on the far right; molecules, organelles, and cells are arranged in the middle in order of increasing size, between these two extremes.
+Figure 3: The relative scale of biological molecules and structures
+Cells can vary between 1 micrometer (μm) and hundreds of micrometers in diameter. Within a cell, a DNA double helix is approximately 10 nanometers (nm) wide, whereas the cellular organelle called a nucleus that encloses this DNA can be approximately 1000 times bigger (about 10 μm). See how cells compare along a relative scale axis with other molecules, tissues, and biological structures (blue arrow at bottom). Note that a micrometer (μm) is also known as a micron.
+© 2010 Nature Education All rights reserved. View Terms of Use
+Figure Detail
+What Are the Different Categories of Cells?
+Rather than grouping cells by their size or shape, scientists typically categorize them by how their genetic material is packaged. If the DNA within a cell is not separated from the cytoplasm, then that cell is a prokaryote. All known prokaryotes, such as bacteria and archaea, are single cells. In contrast, if the DNA is partitioned off in its own membrane-bound room called the nucleus, then that cell is a eukaryote. Some eukaryotes, like amoebae, are free-living, single-celled entities. Other eukaryotic cells are part of multicellular organisms. For instance, all plants and animals are made of eukaryotic cells — sometimes even trillions of them (Figure 4).
+
+
+An illustration shows a eukaryotic cell beside a prokaryotic cell, and the major structural differences are shown. The much larger eukaryotic cell contains elaborate membranous networks and bean-shaped organelles. Its DNA is inside a nuclear membrane. The prokaryotic cell has a comparatively empty interior containing loose DNA material symbolized by a tangled thread, alongside only ribosomes and no membrane-bound organelles.
+Figure 4: Comparing basic eukaryotic and prokaryotic differences
+A eukaryotic cell (left) has membrane-enclosed DNA, which forms a structure called the nucleus (located at center of the eukaryotic cell; note the purple DNA enclosed in the pink nucleus). A typical eukaryotic cell also has additional membrane-bound organelles of varying shapes and sizes. In contrast, a prokaryotic cell (right) does not have membrane-bound DNA and also lacks other membrane-bound organelles as well.
+© 2010 Nature Education All rights reserved. View Terms of Use
+
+How Did Cells Originate?
+Researchers hypothesize that all organisms on Earth today originated from a single cell that existed some 3.5 to 3.8 billion years ago. This original cell was likely little more than a sac of small organic molecules and RNA-like material that had both informational and catalytic functions. Over time, the more stable DNA molecule evolved to take over the information storage function, whereas proteins, with a greater variety of structures than nucleic acids, took over the catalytic functions.
+
+As described in the previous section, the absence or presence of a nucleus — and indeed, of all membrane-bound organelles — is important enough to be a defining feature by which cells are categorized as either prokaryotes or eukaryotes. Scientists believe that the appearance of self-contained nuclei and other organelles represents a major advance in the evolution of cells. But where did these structures come from? More than one billion years ago, some cells "ate" by engulfing objects that floated in the liquid environment in which they existed. Then, according to some theories of cellular evolution, one of the early eukaryotic cells engulfed a prokaryote, and together the two cells formed a symbiotic relationship. In particular, the engulfed cell began to function as an organelle within the larger eukaryotic cell that consumed it. Both chloroplasts and mitochondria, which exist in modern eukaryotic cells and still retain their own genomes, are thought to have arisen in this manner (Figure 5).
+
+
+A schematic represents the gradual assimilation of independent prokaryotic organisms by eukaryotic cells, into functioning organelles, in five simplified evolutionary stages.
+Figure 5: The origin of mitochondria and chloroplasts
+Mitochondria and chloroplasts likely evolved from engulfed prokaryotes that once lived as independent organisms. At some point, a eukaryotic cell engulfed an aerobic prokaryote, which then formed an endosymbiotic relationship with the host eukaryote, gradually developing into a mitochondrion. Eukaryotic cells containing mitochondria then engulfed photosynthetic prokaryotes, which evolved to become specialized chloroplast organelles.
+© 2010 Nature Education All rights reserved. View Terms of Use
+Figure Detail
+Of course, prokaryotic cells have continued to evolve as well. Different species of bacteria and archaea have adapted to specific environments, and these prokaryotes not only survive but thrive without having their genetic material in its own compartment. For example, certain bacterial species that live in thermal vents along the ocean floor can withstand higher temperatures than any other organisms on Earth.
+
+Conclusion
+Cells are the smallest common denominator of life. Some cells are organisms unto themselves; others are part of multicellular organisms. All cells are made from the same major classes of organic molecules: nucleic acids, proteins, carbohydrates, and lipids. In addition, cells can be placed in two major categories as a result of ancient evolutionary events: prokaryotes, with their cytoplasmic genomes, and eukaryotes, with their nuclear-encased genomes and other membrane-bound organelles. Though they are small, cells have evolved into a vast variety of shapes and sizes. Together they form tissues that themselves form organs, and eventually entire organisms.
