@@ -36,7 +36,7 @@ def _split_text_sentences_helper(document, sentence_size, overlap_size):
 def split_text_sentences(documents: list[Document]):
     all_chunks = []
     for doc in documents:
-        chunks = _split_text_sentences_helper(doc, 15, 7)
+        chunks = _split_text_sentences_helper(doc, 20, 10)
         all_chunks.extend(chunks)
     return all_chunks
 
@@ -61,7 +61,7 @@ def save_to_chroma(chunks: list[Document]):
 def embed_user(user_input):
     embedding_function = OpenAIEmbeddings(openai_api_key = api_key)
     db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
-    results = db.similarity_search_with_relevance_scores(user_input, k=4)
+    results = db.similarity_search_with_relevance_scores(user_input, k=5)
     return results
 
 
@@ -98,8 +98,5 @@ def main():
     print()
     sources = [(doc.metadata["source"], doc.metadata["sentence_start_index"]) for doc, _ in relevant_context]
     print(sources)
-
-
-
 
 main()
