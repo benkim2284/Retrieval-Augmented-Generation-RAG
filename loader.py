@@ -1,3 +1,4 @@
+import json
 import os
 import shutil
 from langchain.document_loaders import DirectoryLoader
@@ -36,20 +37,21 @@ def _split_text_sentences_helper(document, sentence_size, overlap_size):
 def split_text_sentences(documents: list[Document]):
     all_chunks = []
     for doc in documents:
+        #depending on whether teacher wants a general quiz or a quiz about a specific worksheet, we will change this.
         chunks = _split_text_sentences_helper(doc, 20, 10)
         all_chunks.extend(chunks)
     return all_chunks
 
-##splitting recursively with characters, but issues when sentence gets cut off and meaning gets cut off as well.
-# def split_text_characters(documents:list[Document]):
-#     text_splitter = RecursiveCharacterTextSplitter(
-#         chunk_size = 1000,
-#         chunk_overlap = 500,
-#         length_function = len,
-#         add_start_index = True
-#     )
-#     chunks = text_splitter.split_documents(documents)
-#     return chunks
+def rewrite_query(user_input):
+    model = ChatOpenAI(openai_api_key = api_key, temperature = 0, model="gpt-3.5-turbo")
+    rewrite_prompt = f"""
+    Respond with only a JSON with the key "search_query", where the value is the academic topic specified
+    in the following question. The question is: {user_input}.
+    """
+    rewritten_query = json.loads(model.invoke(rewrite_prompt).content)["search_query"]
+    print(rewritten_query)
+    return rewritten_query
+
 
 def save_to_chroma(chunks: list[Document]):
     if os.path.exists(CHROMA_PATH):
@@ -62,6 +64,7 @@ def embed_user(user_input):
     embedding_function = OpenAIEmbeddings(openai_api_key = api_key)
     db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
     results = db.similarity_search_with_relevance_scores(user_input, k=5)
+    print([a[1] for a in results])
     return results
 
 
@@ -76,7 +79,8 @@ def main():
     user_input = input("User:\n")
     print()
     print()
-    relevant_context = embed_user(user_input)
+    rewritten_query = rewrite_query(user_input)
+    relevant_context = embed_user(rewritten_query)
     relevant_context_text = "\n\n---\n\n".join(doc.page_content for doc, _ in relevant_context)
 
 
@@ -84,15 +88,15 @@ def main():
     prompt_template = f"""
     Answer the question based only on the following context:
 
+    <context>
     {relevant_context_text}
-
-    ---
+    </context>
 
     Answer the following question based on the context provided above: {user_input}
     """
 
     #model
-    model = ChatOpenAI(openai_api_key = api_key, temperature = 0)
+    model = ChatOpenAI(openai_api_key = api_key, temperature = 0, model="gpt-3.5-turbo")
     print("Itaewon LLM:")
     print(model.invoke(prompt_template).content)
     print()
