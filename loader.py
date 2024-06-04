@@ -2,19 +2,17 @@ import json
 import os
 import shutil
 from langchain.document_loaders import DirectoryLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.schema import Document
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores.chroma import Chroma
 from langchain_openai import ChatOpenAI
 from nltk.tokenize import sent_tokenize
 
-api_key = <API_KEY>
-DATA_PATH = "data/investment_banking"
+api_key = "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"
 CHROMA_PATH = "chroma"
 
-
-def load_documents():
+def load_documents(user_grade):
+    DATA_PATH = f"data/{user_grade}"
     loader = DirectoryLoader(DATA_PATH, "*.md")
     documents = loader.load()
     return documents
@@ -49,7 +47,6 @@ def rewrite_query(user_input):
     in the following question. The question is: {user_input}.
     """
     rewritten_query = json.loads(model.invoke(rewrite_prompt).content)["search_query"]
-    print(rewritten_query)
     return rewritten_query
 
 
@@ -64,22 +61,24 @@ def embed_user(user_input):
     embedding_function = OpenAIEmbeddings(openai_api_key = api_key)
     db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
     results = db.similarity_search_with_relevance_scores(user_input, k=5)
+    #printing similarities score for each queried chunk
     print([a[1] for a in results])
     return results
 
 
-def main():
+def generate_worksheet(user_grade, user_instructions):
     #loading documents, and then saving it into vector database
-    documents = load_documents()
+    documents = load_documents(user_grade)
     chunks = split_text_sentences(documents)
     save_to_chroma(chunks)
 
-    #user prompt and vector database query
-    print("\n\n\n\n\n\n\n")
-    user_input = input("User:\n")
-    print()
-    print()
-    rewritten_query = rewrite_query(user_input)
+    # #user prompt and vector database query
+    # print("\n\n\n\n\n\n\n")
+    # user_input = input("User:\n")
+    # print()
+    # print()
+    rewritten_query = rewrite_query(user_instructions)
+    print(f"rewritten query: {rewritten_query}")
     relevant_context = embed_user(rewritten_query)
     relevant_context_text = "\n\n---\n\n".join(doc.page_content for doc, _ in relevant_context)
 
@@ -92,15 +91,20 @@ def main():
     {relevant_context_text}
     </context>
 
-    Answer the following question based on the context provided above: {user_input}
+    Answer the following question based on the context provided above: {user_instructions}
     """
 
     #model
     model = ChatOpenAI(openai_api_key = api_key, temperature = 0, model="gpt-3.5-turbo")
     print("Itaewon LLM:")
-    print(model.invoke(prompt_template).content)
+    model_response = model.invoke(prompt_template).content
+    print(model_response)
     print()
-    sources = [(doc.metadata["source"], doc.metadata["sentence_start_index"]) for doc, _ in relevant_context]
+    sources = [(doc.metadata["source"], doc.metadata["sentence_start_index"], doc) for doc, _ in relevant_context]
     print(sources)
+    return model_response
 
-main()
+def hello():
+    return "hello"
+
+#generate_worksheet("state_curr", "generate me a 10 question on fractions according to the standards specified")
