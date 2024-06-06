@@ -1,10 +1,10 @@
 import json
 import os
 import shutil
-from langchain.document_loaders import DirectoryLoader
+from langchain_community.document_loaders import DirectoryLoader
 from langchain.schema import Document
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores.chroma import Chroma
+from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_community.vectorstores import Chroma
 from langchain_openai import ChatOpenAI
 from nltk.tokenize import sent_tokenize
 
@@ -55,7 +55,7 @@ def save_to_chroma(chunks: list[Document]):
         if os.path.exists(CHROMA_PATH):
             shutil.rmtree(CHROMA_PATH)
         print("hello man!!!!")
-        db = Chroma.from_documents(chunks, OpenAIEmbeddings(openai_api_key=api_key), persist_directory=CHROMA_PATH)
+        db = Chroma.from_documents(chunks, OpenAIEmbeddings(openai_api_key=api_key))
         db.persist()
     
     except Exception as e:
@@ -64,7 +64,7 @@ def save_to_chroma(chunks: list[Document]):
 
 def embed_user(user_input):
     embedding_function = OpenAIEmbeddings(openai_api_key = api_key)
-    db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
+    db = Chroma(embedding_function=embedding_function)
     results = db.similarity_search_with_relevance_scores(user_input, k=5)
     #printing similarities score for each queried chunk
     print([a[1] for a in results])
@@ -129,4 +129,4 @@ def generate_worksheet(user_grade, user_instructions):
 def hello():
     return "hello"
 
-#generate_worksheet("state_curr", "generate me a 10 question on fractions according to the standards specified")
+# generate_worksheet("MathStandards/2nd", "generate me a 10 question on fractions according to the standards specified")
