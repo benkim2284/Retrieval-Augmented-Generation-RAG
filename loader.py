@@ -36,7 +36,7 @@ def split_text_sentences(documents: list[Document]):
     all_chunks = []
     for doc in documents:
         #depending on whether teacher wants a general quiz or a quiz about a specific worksheet, we will change this.
-        chunks = _split_text_sentences_helper(doc, 20, 10)
+        chunks = _split_text_sentences_helper(doc, 15, 3)
         all_chunks.extend(chunks)
     return all_chunks
 
@@ -51,11 +51,16 @@ def rewrite_query(user_input):
 
 
 def save_to_chroma(chunks: list[Document]):
-    if os.path.exists(CHROMA_PATH):
-        shutil.rmtree(CHROMA_PATH)
-
-    db = Chroma.from_documents(chunks, OpenAIEmbeddings(openai_api_key = api_key), persist_directory=CHROMA_PATH)
-    db.persist()
+    try:
+        if os.path.exists(CHROMA_PATH):
+            shutil.rmtree(CHROMA_PATH)
+        print("hello man!!!!")
+        db = Chroma.from_documents(chunks, OpenAIEmbeddings(openai_api_key=api_key), persist_directory=CHROMA_PATH)
+        db.persist()
+    
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        raise
 
 def embed_user(user_input):
     embedding_function = OpenAIEmbeddings(openai_api_key = api_key)
@@ -84,15 +89,32 @@ def generate_worksheet(user_grade, user_instructions):
 
 
     #prompt format
-    prompt_template = f"""
-    Answer the question based only on the following context:
+    # prompt_template = f"""
+    # You are a worksheet generator that ensures that the generated questions follow the school curriculum standards.
+    # The school curriculum standards are the following:
 
-    <context>
-    {relevant_context_text}
-    </context>
+    # <school curriculum standards>
+    # {relevant_context_text}
+    # </school curriculum standards>
 
-    Answer the following question based on the context provided above: {user_instructions}
-    """
+    # Carefully analyze the curriculum standards specified above and make sure that the worksheet includes both mathematical and conceptual questions.
+    # The user's instruction for generating the worksheet is: "{user_instructions}"
+    # """
+
+    prompt_template = f'''
+    You are a worksheet generator. Generate a worksheet according to these instructions: "{user_instructions}" 
+
+    Ensure that the content of the worksheet aligns with curriculum standards, which are the following: 
+
+    <school curriculum standards>
+        {relevant_context_text}
+    </school curriculum standards>
+
+    Please provide a variety of question types, including multiple-choice, short answer, and problem-solving, to engage students effectively. 
+    The worksheet should include questions/problems, each accompanied by clear instructions if needed.
+    Use simple language and provide step-by-step explanations to help students understand the material easily.
+    '''
+    print(prompt_template)
 
     #model
     model = ChatOpenAI(openai_api_key = api_key, temperature = 0, model="gpt-3.5-turbo")
