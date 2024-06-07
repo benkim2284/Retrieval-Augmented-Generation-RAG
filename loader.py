@@ -39,7 +39,7 @@ def split_text_sentences(documents: list[Document]):
     all_chunks = []
     for doc in documents:
         #depending on whether teacher wants a general quiz or a quiz about a specific worksheet, we will change this.
-        chunks = _split_text_sentences_helper(doc, 15, 3)
+        chunks = _split_text_sentences_helper(doc, 10, 2)
         all_chunks.extend(chunks)
     return all_chunks
 
@@ -75,7 +75,7 @@ def embed_user(user_input):
     return results
 
 
-def generate_worksheet(user_grade, user_instructions):
+def generate_worksheet(user_grade, user_instructions, user_context):
     #loading documents, and then saving it into vector database
     documents = load_documents(user_grade)
     chunks = split_text_sentences(documents)
@@ -110,9 +110,16 @@ def generate_worksheet(user_grade, user_instructions):
 
     Ensure that the content of the worksheet aligns with curriculum standards, which are the following: 
 
-    <school curriculum standards>
+    <School Curriculum Standards>
         {relevant_context_text}
-    </school curriculum standards>
+    </School Curriculum Standards>
+
+    Ensure that the contents of the worksheet reference the context provided by the user. The context is:
+
+    <Context>
+        {user_context}
+    </Context>
+
 
     Please provide a variety of question types, including multiple-choice, short answer, and problem-solving, to engage students effectively. 
     The worksheet should include questions/problems, each accompanied by clear instructions if needed.
@@ -132,6 +139,5 @@ def generate_worksheet(user_grade, user_instructions):
 
 def hello():
     return "hello"
-
 # generate_worksheet("investment_banking", "Why did Toni get denied from  the club?")
 

@@ -25,13 +25,16 @@ def addNum():
     data = request.get_json()
     grade = data.get('grade')
     instructions = data.get('instructions')
+    context = data.get('context')
+    print(data)
     print(grade)
     print(instructions)
+    print(context)
 
     if not grade or not instructions:
         return jsonify({'error': 'Missing grade or instruction specification'}), 400
 
-    result = generate_worksheet(grade, instructions)
+    result = generate_worksheet(grade, instructions, context)
 
     # Return the result as a JSON response
     return jsonify({'worksheet': result})
