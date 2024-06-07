@@ -11,6 +11,9 @@ from nltk.tokenize import sent_tokenize
 api_key = "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"
 CHROMA_PATH = "chroma"
 
+embedding_function = OpenAIEmbeddings(openai_api_key = api_key)
+db = Chroma(embedding_function=embedding_function)
+
 def load_documents(user_grade):
     DATA_PATH = f"data/{user_grade}"
     loader = DirectoryLoader(DATA_PATH, "*.md")
@@ -52,19 +55,20 @@ def rewrite_query(user_input):
 
 def save_to_chroma(chunks: list[Document]):
     try:
-        if os.path.exists(CHROMA_PATH):
-            shutil.rmtree(CHROMA_PATH)
-        print("hello man!!!!")
-        db = Chroma.from_documents(chunks, OpenAIEmbeddings(openai_api_key=api_key))
-        db.persist()
+        currIdList = db.get()["ids"]
+        print(f"BEFORE DELETION: There are currently {len(currIdList)} chunks in the vector database")
+        if (len(currIdList) > 0):
+            db.delete(ids=currIdList)
+            print(f"AFTER DELETION: There are currently {len(db.get()['ids'])} chunks in the vector database")
+        db.from_documents(chunks, OpenAIEmbeddings(openai_api_key=api_key))
+        print(f"AFTER INSERTION: There are currently {len(db.get()['ids'])} chunks in the vector database")
     
     except Exception as e:
         print(f"Unexpected error: {e}")
         raise
 
 def embed_user(user_input):
-    embedding_function = OpenAIEmbeddings(openai_api_key = api_key)
-    db = Chroma(embedding_function=embedding_function)
+    
     results = db.similarity_search_with_relevance_scores(user_input, k=5)
     #printing similarities score for each queried chunk
     print([a[1] for a in results])
@@ -129,4 +133,5 @@ def generate_worksheet(user_grade, user_instructions):
 def hello():
     return "hello"
 
-# generate_worksheet("MathStandards/2nd", "generate me a 10 question on fractions according to the standards specified")
+# generate_worksheet("investment_banking", "Why did Toni get denied from  the club?")
+
