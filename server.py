@@ -26,7 +26,6 @@ def addNum():
     grade = data.get('grade')
     instructions = data.get('instructions')
     context = data.get('context')
-    print(data)
     print(grade)
     print(instructions)
     print(context)
