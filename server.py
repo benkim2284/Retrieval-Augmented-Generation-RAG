@@ -36,7 +36,8 @@ def addNum():
     result = generate_worksheet(grade, instructions, context)
 
     # Return the result as a JSON response
-    return jsonify({'worksheet': result})
+    
+    return result
 
 
 # main driver function

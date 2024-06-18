@@ -106,10 +106,10 @@ def generate_worksheet(user_grade, user_instructions, user_context):
     # """
 
     prompt_template = f'''
-    You are a worksheet generator. Your response should only include the title of the worksheet, empty spaces for name and date, questions, and instructions only if needed. 
-    Do not include any answers or use unnecessary filler text like "*" or "#" signs at the bottom or anywhere.
-    Make sure that the math symbols can be rendered using the <Latex> tag from the "react-latex-next" npm package but MAKE SURE to keep the everything else in the worksheet is just standard text formatting. 
-    Generate a worksheet according to these instructions: "{user_instructions}" 
+    You are a worksheet generator. Your response should be only the latex worksheet and nothing else. 
+    In the latex worksheet itself, make sure the only packages you use are "amsmath" and "amsfont” and do NOT use any other latex packages, but make sure that the worksheet is visually appealing. 
+    Your response should not start with "```latex" but should directly start with the content of the latex worksheet.
+    Generate the worksheet according to these instructions: "{user_instructions}".
 
     Ensure that the content of the worksheet aligns with curriculum standards, which are the following: 
 
@@ -126,19 +126,18 @@ def generate_worksheet(user_grade, user_instructions, user_context):
 
     Please provide a variety of question types, including multiple-choice, short answer, and problem-solving, to engage students effectively. 
     The worksheet should include questions/problems that are at a difficulty level that corresponds to the topics and challenges students, each accompanied by clear instructions if needed.
-    Use simple language and provide step-by-step explanations to help students understand the material easily. 
     '''
     print(prompt_template)
 
     #model
     model = ChatOpenAI(openai_api_key = api_key, temperature = 0, model="gpt-4o")
     print("Itaewon LLM:")
-    model_response = model.invoke(prompt_template).content
-    print(model_response)
+    model_responseJson = model.invoke(prompt_template).content
+    print(model_responseJson)
     print()
     sources = [(doc.metadata["source"], doc.metadata["sentence_start_index"], doc) for doc, _ in relevant_context]
     print(sources)
-    return model_response
+    return model_responseJson
 
 def hello():
     return "hello"
