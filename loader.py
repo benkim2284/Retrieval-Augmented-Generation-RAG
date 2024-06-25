@@ -1,9 +1,7 @@
 import json
-import os
-import shutil
 from langchain_community.document_loaders import DirectoryLoader
 from langchain.schema import Document
-from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_openai import ChatOpenAI
 from nltk.tokenize import sent_tokenize
@@ -87,7 +85,7 @@ def generate_worksheet(user_grade, user_instructions, user_context):
     # print()
     # print()
     rewritten_query = rewrite_query(user_instructions)
-    print(f"rewritten query: {rewritten_query}")
+    print(f"rewritten query: {rewritten_query}") 
     relevant_context = embed_user(rewritten_query)
     relevant_context_text = "\n\n---\n\n".join(doc.page_content for doc, _ in relevant_context)
 
@@ -139,7 +137,50 @@ def generate_worksheet(user_grade, user_instructions, user_context):
     print(sources)
     return model_responseJson
 
+def generate_lab(user_grade, user_objectives, user_skills, user_context):
+    #loading documents, and then saving it into vector database
+    # documents = load_documents(user_grade)
+    # chunks = split_text_sentences(documents)
+    # save_to_chroma(chunks)
+
+    # rewritten_query = rewrite_query(learning_objectives)
+    # print(f"rewritten query: {rewritten_query}") 
+    # relevant_context = embed_user(rewritten_query)
+    # relevant_context_text = "\n\n---\n\n".join(doc.page_content for doc, _ in relevant_context)
+
+
+    prompt_template = f'''
+    You are a lab guide generator. Your response should be only the latex lab guide and nothing else. 
+    In the latex lab guide itself, make sure the only packages you use are "amsmath" and "amsfont” and do NOT use any other latex packages,
+    but make sure that the lab guide is visually appealing and is suited for data collection/analysis if necessary. 
+    Your response should not start with "```latex" but should directly start with the content of the latex lab guide.
+    Generate me a lab guide that has the following: an introduction, list of materials and equipments, detailed procedures, safety precautions, data collection and analysis, and conclusion/questions. 
+    
+    The lab guide should achieve the learning objectives of "{user_objectives}".
+
+    There should be an emphasis on the skills of "{user_skills}".
+
+    Ensure that the content of the lab guide is suitable for a {user_grade} grade level.  
+
+    Ensure that the contents of the lab guide reference the context provided by the user. The context is:
+
+    <Context>
+        {user_context}
+    </Context>
+    '''
+    print(prompt_template)
+
+    #model
+    model = ChatOpenAI(openai_api_key = api_key, temperature = 0, model="gpt-4o")
+    print("Itaewon LLM:")
+    model_response = model.invoke(prompt_template).content
+    print(model_response)
+    print()
+    # sources = [(doc.metadata["source"], doc.metadata["sentence_start_index"], doc) for doc, _ in relevant_context]
+    # print(sources)
+    return model_response
+
 def hello():
-    return "hello"
+    return "Planform Server"
 # generate_worksheet("investment_banking", "Why did Toni get denied from  the club?")
 

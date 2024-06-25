@@ -2,7 +2,7 @@
 # An object of Flask class is our WSGI application.
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from loader import hello, generate_worksheet
+from loader import hello, generate_worksheet, generate_lab
 
 # Flask constructor takes the name of 
 # current module (__name__) as argument.
@@ -21,7 +21,7 @@ def hello_world():
     return hello()
 
 @app.route("/generate/worksheet", methods=['POST'])
-def addNum():
+def generate_worksheet_endpoint():
     data = request.get_json()
     grade = data.get('grade')
     instructions = data.get('instructions')
@@ -33,16 +33,32 @@ def addNum():
     if not grade or not instructions:
         return jsonify({'error': 'Missing grade or instruction specification'}), 400
 
-    result = generate_worksheet(grade, instructions, context)
+    result = generate_worksheet(user_grade=grade, user_instructions=instructions, user_context=context)
 
     # Return the result as a JSON response
     
     return result
 
+@app.route("/generate/lab", methods=['POST'])
+def generate_lab_endpoint():
+    data = request.get_json()
+    grade = data.get('grade')
+    objectives = data.get('objectives')
+    skills = data.get('skills')
+    context = data.get('context')
+
+    print(grade)
+    print(objectives)
+    print(skills)
+    print(context)
+
+    result = generate_lab(user_grade=grade, user_objectives=objectives, user_skills=skills, user_context=context)
+
+    return result
+
 
 # main driver function
 if __name__ == '__main__':
-
     # run() method of Flask class runs the application 
     # on the local development server.
     app.run(port=3006, debug=True)
