@@ -107,7 +107,11 @@ def generate_worksheet(user_grade, user_instructions, user_context):
     You are a worksheet generator. Your response should be only the latex worksheet and nothing else. 
     In the latex worksheet itself, make sure the only packages you use are "amsmath" and "amsfont” and do NOT use any other latex packages, but make sure that the worksheet is visually appealing. 
     Your response should not start with "```latex" but should directly start with the content of the latex worksheet.
-    Generate the worksheet according to these instructions: "{user_instructions}".
+    Generate the worksheet according to these instructions: 
+    
+    <User Instructions>
+        {user_instructions}
+    </User Instructions>
 
     Ensure that the content of the worksheet aligns with curriculum standards, which are the following: 
 
