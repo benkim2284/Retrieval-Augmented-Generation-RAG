@@ -3,6 +3,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from loader import hello, generate_worksheet, generate_lab
+from ai_audio import run_voice_agent, AI_Assistant
 
 # Flask constructor takes the name of 
 # current module (__name__) as argument.
@@ -55,6 +56,20 @@ def generate_lab_endpoint():
     result = generate_lab(user_grade=grade, user_objectives=objectives, user_skills=skills, user_context=context)
 
     return result
+
+ai_assistant: AI_Assistant = None
+
+@app.route("/voice_agent/start", methods=['POST'])
+def generate_voice_agent_endpoint():
+    data = request.get_json()
+    continue_talking = data.get('continue')
+
+    global ai_assistant  
+
+    if not ai_assistant and continue_talking:
+        ai_assistant = AI_Assistant()
+    run_voice_agent(ai_assistant, continue_talking)
+    return ai_assistant.io_pairs
 
 
 # main driver function
