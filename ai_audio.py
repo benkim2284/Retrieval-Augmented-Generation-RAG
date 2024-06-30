@@ -24,9 +24,12 @@ class AI_Assistant:
             {"role": "system", "content": f"You are tasked with trying to extract information from a student to get information on what his/her inerests are. Moreover get to know this student be his/her friend.: The student's name is Dennis Lee and he is in 7th grade. "},
         ]
 
-        self.introduction = "Hello, I'm Rachel your teacher's assistant. I would love to learn more about you. How are you today?"
+        self.recent_question = "Hello, I'm Rachel your teacher's assistant. I would love to learn more about you. How are you today?"
+        self.recent_answer = ""
         self.continue_listening = True
         self.io_pairs = []
+        
+
 
     def stop_transcription(self):
         if self.transcriber:
@@ -58,6 +61,10 @@ class AI_Assistant:
 
     def generate_ai_response(self, transcript):
         user_response = transcript.text
+        #saving recent answer 
+        self.recent_answer = user_response
+
+        self.io_pairs.append({"input": self.recent_question, "output": self.recent_answer})
 
         self.full_transcript.append({"role": "user", "content": user_response})
         print(f"\nPatient: {user_response}", end="\r\n")
@@ -68,13 +75,9 @@ class AI_Assistant:
         )
 
         ai_response = response.choices[0].message.content
+        #saving recent question
+        self.recent_question = ai_response
         
-        if len(self.io_pairs) == 0:
-            self.io_pairs.append({"input": self.introduction, "output": user_response})
-            self.io_pairs.append({"input": ai_response})
-        else:
-            self.io_pairs[-1]["output"] = user_response
-            self.io_pairs.append({"input": ai_response})
 
         self.generate_audio(ai_response)
 
@@ -106,7 +109,7 @@ class AI_Assistant:
             )
 
             if len(self.io_pairs) == 0:
-                self.generate_audio(self.introduction)
+                self.generate_audio(self.recent_question)
 
             self.transcriber.connect()
             print("transcriber connected!")
@@ -114,7 +117,7 @@ class AI_Assistant:
             microphone_stream = aai.extras.MicrophoneStream(sample_rate=16000)
             self.transcriber.stream(microphone_stream)
         else:
-            return ""
+            return
 
 if __name__ == "__main__":
     ai_assistant = AI_Assistant()
@@ -124,8 +127,7 @@ def run_voice_agent(ai_assistant: AI_Assistant, should_continue: bool):
     ai_assistant.continue_listening = should_continue
     if ai_assistant.continue_listening:
         ai_assistant.start_transcription()
-    print('done with it all smhh')
     print(ai_assistant.io_pairs)
-    return 
+    return "Transcription Finished"
 
 
