@@ -8,7 +8,7 @@ from langchain.vectorstores.chroma import Chroma
 from langchain_openai import ChatOpenAI
 from nltk.tokenize import sent_tokenize
 
-api_key = "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"
+api_key = <>
 CHROMA_PATH = "chroma"
 
 def load_documents(user_grade):
